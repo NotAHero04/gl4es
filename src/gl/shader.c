@@ -199,12 +199,14 @@ void APIENTRY_GL4ES gl4es_glShaderSource(GLuint shader, GLsizei count, const GLc
             if (!strncmp(source2, "#version ", 9)) {
                 glshader->converted = strdup(source2);
                 if (glshader->converted[9] == '1') {
-                    if (glshader->converted[10] - '0' < 2) {
-                        // 100, 110 -> 120
-                        glshader->converted[10] = '2';
+                    if (glshader->converted[10] - '0' < 3) {
+                        // 100, 110, 120 -> 100
+                        glshader->converted[10] = '0';
                     } else if (glshader->converted[10] - '0' < 6) {
-                        // 130, 140, 150 -> 330
-                        glshader->converted[9] = glshader->converted[10] = '3';
+                        // 130, 140, 150 -> 300 es... moment
+                        // glshader->converted[9] = '3';
+                        // TODO: how to insert "es" profile correctly?
+                        glshader->converted[10] = '0';
                     }
                 }
                 // remove "core", is it safe?
