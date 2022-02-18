@@ -209,6 +209,12 @@ void APIENTRY_GL4ES gl4es_glShaderSource(GLuint shader, GLsizei count, const GLc
                         glshader->converted[10] = '0';
                     }
                 }
+                // bleeding-edge test: "gl4es" profile for specifying "es" profile
+                if (!strncmp(&glshader->converted[13], "gl4es", 5)) {
+                    strncpy(&glshader->converted[13], "es  \n", 5);
+                    glshader->converted[9] = '3';
+                }
+
                 // remove "core", is it safe?
                 if (!strncmp(&glshader->converted[13], "core", 4)) {
                     strncpy(&glshader->converted[13], "\n//c", 4);
